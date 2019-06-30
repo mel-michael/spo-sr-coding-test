@@ -1,0 +1,15 @@
+{
+  "name": "spo-sr-coding-test",
+  "version": "0.0.1",
+  "description": "a calendar app exercise",
+  "main": "index.js",
+  "repository": "git@github.com:mel-michael/spo-sr-coding-test.git",
+  "author": "Mel Michael <mel.michael007@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "mock-data": "npx json-server --watch db.json --port 4000"
+  },
+  "dependencies": {
+    "json-server": "^0.15.0"
+  }
+}
