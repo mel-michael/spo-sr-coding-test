@@ -1,14 +1,17 @@
 import React, { Fragment } from 'react';
 
+import './calendar.css';
+
 export default function Calendar({ dates }) {
+  // TODO: Fix empty cell issue
   return (
     <Fragment>
-      {dates.map(dateRow => {
+      {dates.map((dateRow, index) => {
+        const row = dateRow[index] || new Date();
         return (
-          <> {/* Short form for using Fragment */}
+          <div key={`${row}_${index}`} className="calendar-row">
             <CalendarRow rowDates={dateRow} />
-            <br />
-          </>
+          </div>
         );
       })}
     </Fragment>
@@ -19,7 +22,9 @@ function CalendarRow({ rowDates }) {
   return (
     <Fragment>
       {rowDates.map(cellDate => (
-        <span>{cellDate.getDate()} | </span>
+        <div key={cellDate.toString()} className="calendar-cell">
+          {cellDate.getDate()}
+        </div>
       ))}
     </Fragment>
   );

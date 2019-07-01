@@ -1,0 +1,22 @@
+.calendar-row {
+	display: flex;
+  color: #70757a;
+  border-bottom: 1px solid #dadce0;
+}
+
+.calendar-row:first-child {
+  border-top: 1px solid #dadce0;
+}
+
+.calendar-cell {
+  flex: 1 ;
+	height: 120px;
+  font-size: 14px;
+	line-height: 30px;
+	border-right: 1px solid #dadce0;
+	cursor: pointer;
+}
+
+.calendar-cell:first-child {
+  border-left: 1px solid #dadce0;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Calendar from './components/Calendar';
+import Calendar from './components/Calendar/Calendar';
 
 import './App.css';
 
