@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+
+.calendar-container {
+  width: 80%;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.weekdays {
+  display: flex;
+  font-size: 16px;
+	line-height: 30px;
+	border-top: 1px solid #dadce0;
+	border-bottom: 1px solid #dadce0;
+}
+
+.day {
+  flex: 1;
+	border-right: 1px solid #dadce0;
+	cursor: pointer;
+}
+
+.day:first-child {
+  border-left: 1px solid #dadce0;
+}
