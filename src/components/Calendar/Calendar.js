@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
+import Reminder from '../Reminder/Reminder';
+import ReminderLabel  from '../Reminder/ReminderLabel';
 import './calendar.css';
 
 function Calendar({ dates }) {
@@ -15,6 +17,7 @@ function Calendar({ dates }) {
 
   return (
     <Fragment>
+      {showReminder && <Reminder cellDetails={cellDetails} showReminder={showReminder} setShowReminder={showReminderFn} />}
       {dates.map((dateRow, index) => {
         const row = dateRow[index] || new Date();
         return (
@@ -31,6 +34,7 @@ function CalendarCell({cellDate, showReminder}) {
   return (
     <div className="calendar-cell" onClick={() => showReminder({ date: cellDate })(true)}>
       {cellDate.getDate()}
+      <ReminderLabel cellDate={cellDate} onClick={showReminder} />
     </div>
   )
 }
