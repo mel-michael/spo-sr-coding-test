@@ -1,4 +1,6 @@
 import { generateDaysInMonth} from '../utils/helper';
+import { FETCH_DATE } from './actions';
+
 
 
 const formatDate = function() {
@@ -26,6 +28,9 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case FETCH_DATE:
+      return { ...state, allDates: action.payload };
+      
     default:
       return state;
   }
