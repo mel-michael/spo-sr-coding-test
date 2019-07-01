@@ -67,6 +67,15 @@
   cursor: pointer;
 }
 
+.reminder-content .button-group {
+  display: flex;
+}
+
+.reminder-content .delete-btn {
+  background: red;
+  margin-right: 10px;
+}
+
 .reminder-label {
   height: 22px;
   background-color: teal;

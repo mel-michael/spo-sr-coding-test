@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { addReminderAction, editReminderAction } from '../../redux/actions';
+import {
+  addReminderAction,
+  editReminderAction,
+  deleteReminderAction
+} from '../../redux/actions';
 
 import './reminder.css';
 
 const Reminder = function(props) {
-  const { setShowReminder, saveReminder, cellDetails, updateReminder } = props;
+  const {
+    setShowReminder,
+    saveReminder,
+    cellDetails,
+    updateReminder,
+    deleteReminder
+  } = props;
   const [reminderData, setReminder] = useState(cellDetails);
 
   const formatDate = cellDate => {
@@ -19,7 +29,6 @@ const Reminder = function(props) {
   };
 
   const submitReminder = reminderData => {
-    console.log('rimmmmmm ', reminderData)
     if (reminderData.id) {
       updateReminder(reminderData);
       setShowReminder(null)(false);
@@ -27,6 +36,11 @@ const Reminder = function(props) {
     }
     reminderData.id = `${Math.random().toString(16).slice(2)}`;
     saveReminder(reminderData);
+    setShowReminder(null)(false);
+  };
+
+  const handleDelete = reminderData => {
+    deleteReminder(reminderData);
     setShowReminder(null)(false);
   };
 
@@ -61,9 +75,21 @@ const Reminder = function(props) {
           value={reminderData.time || ''}
           required
         />
-        <button type="submit" onClick={() => submitReminder(reminderData)}>
-        {reminderData.id ? 'Update' : 'Save'} 
-        </button>
+        <div className="button-group">
+          {reminderData.id && (
+            <button type="submit" name="deleteBtn"
+              className="delete-btn"
+              onClick={() => handleDelete(reminderData)}
+            >
+              Delete
+            </button>
+          )}
+          <button type="submit" name="submitBtn"
+            onClick={() => submitReminder(reminderData)}
+          >
+            {reminderData.id ? 'Update' : 'Save'}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -71,7 +97,8 @@ const Reminder = function(props) {
 
 const mapDispatchToProps = dispatch => ({
   saveReminder: addReminderAction(dispatch),
-  updateReminder: editReminderAction(dispatch)
+  updateReminder: editReminderAction(dispatch),
+  deleteReminder: deleteReminderAction(dispatch)
 });
 
 const mapStateToProps = state => ({
