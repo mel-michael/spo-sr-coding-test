@@ -1,57 +1,44 @@
-# SPO recruitment task for Frontend Developers
+# SPO Demo Calendar App
 
-Hello! If you are here then you reached the coding challenge for Frontend Developers at SPO! 
-This coding challenge should represent a task that is very close to what we are usually work on at SPO.
-You should take no more than 5h to complete this task.
-
-The souce code of the solution should be provided as a bunch of files (or via github repo). It is highly recommended to use some build tools (preferably webpack) and push all the sources to git repository so you will be able to demonstrate also your ability of working with build tools and git itself. Please note that **code quality** is also important for us.
-
-Good luck to you and hope you will enjoy the process while solving this task!
+This is a sample calendar application.
 
 
-## Create a demo calendar application
+## Installation
 
-The aim of this exercise is to create a demo calendar application using React & Redux. You can use 'npm mock-json-server' to mock the server data and do the proper API calls. You need to use *REST API* to get the data.
+1. Clone repository git clone git@github.com:mel-michael/spo-sr-coding-test.git
 
-Our focus is on the functionality of the calendar, especially on the data fetching. And don't worry, if you can't finish it in the given time, we will just have a look at what you have done so far and you can explain your code to us :-)
+2. cd into spo-sr-coding-test directory.
 
-You can be creative with your idea of the calendar. You could do a daily list view calendar or stick more to this example:
+3. yarn install to get all the app dependencies.
 
-![alt text](https://github.com/gevorgmakaryan/spo-sr-dev-test/blob/master/Screen-Shot-2018-07-25-at-14.21.00-768x549.png)
+4. yarn start to bootstrap the application
 
+## Run
 
-### Technical requirements
-
-1. Ability to add a new “reminder” (max 30 chars) for a user entered day and time.
-
-2. Display reminders on the calendar view in the correct time order.
-
-3. Ability to edit reminders – including changing text, day and time & colour.
-
-4. Ability to delete reminders.
-
-5. Calendar should be responsive.
-
-6. Use a CSS preprocessor like LESS
-
-7. Provide a readme with an instruction how to install your application
-
-8. You should you React + redux.
+- Go to `localhost:4000/dates` to access the mock data in the `db.json` file. 
+- Go to `localhost:3000` to view the calandar app
 
 
-### Bonus (optional)
+### Technology
 
-1. Writing unit tests for the available features will be considered as a big plus (Jest, Enzyme).
+* [react](http://reactjs.org)
 
-2. Find a nice way to handle the displaying of the reminders, when multiple appear on the same date.
+* [redux](https://redux.js.org)
 
-3. Allow the user to select a colour when creating a reminder and display it appropriately.
+* [json-server](https://github.com/typicode/json-server)
 
-4. Prev / Next month (or day) functionality
+* [webpack](https://webpack.js.org)
 
-5. Use date-fns for dates or other simple library (avoid using moment.js).
 
-6. Drag&drop ability to sort reminders.
+### TODOs 
 
-7. Using react hooks.
+1. Sort by time.
+
+2. Display 3 reminders instead of all.
+
+3. Add ability to set and update color
+
+4. Fix calendar cell issue.
+
+5. Write unit tests.
 
