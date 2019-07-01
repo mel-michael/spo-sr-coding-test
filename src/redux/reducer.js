@@ -1,4 +1,4 @@
-import { ADD_REMINDER, FETCH_DATE } from './actions';
+import { ADD_REMINDER, FETCH_DATE, EDIT_REMINDER } from './actions';
 
 const initialState = {
   allDates: [],
@@ -29,6 +29,23 @@ export const reducer = (state = initialState, action) => {
       }
 
       reminders[reminderKey][dateKey] = [...reminders[reminderKey][dateKey], action.payload];
+      return { ...state, ...reminders };
+
+    case EDIT_REMINDER:
+      const { date: reminderDate } = action.payload;
+      const editDateObj = new Date(`${reminderDate}`);
+      const editReminderKey = `${editDateObj.getFullYear()}_${editDateObj.getMonth()}`;
+      const editDateKey = `${editDateObj.getDate()}`;
+
+      const reminderCollection = reminders[editReminderKey][editDateKey];
+      const updatedReminderCollection = reminderCollection.map(item => {
+        if (item.id === action.payload.id) {
+          return action.payload
+        }
+        return item
+      });
+
+      reminders[editReminderKey][editDateKey] = updatedReminderCollection;
       return { ...state, ...reminders };
 
     default:

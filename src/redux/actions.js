@@ -2,8 +2,9 @@ import Axios from 'axios';
 
 import { generateDaysInMonth } from '../utils/helper';
 
-export const ADD_REMINDER = 'ADD_REMINDER';
 export const FETCH_DATE = 'FETCH_DATE';
+export const ADD_REMINDER = 'ADD_REMINDER';
+export const EDIT_REMINDER = 'EDIT_REMINDER';
 
 const DB_URL = 'http://localhost:4000/dates';
 
@@ -26,6 +27,10 @@ const formatDate = function(dates) {
 
 export const addReminderAction = dispatch => data => {
   return dispatch({ type: ADD_REMINDER, payload: data });
+};
+
+export const editReminderAction = dispatch => data => {
+  return dispatch({ type: EDIT_REMINDER, payload: data });
 };
 
 export const getDate = dispatch => () => {

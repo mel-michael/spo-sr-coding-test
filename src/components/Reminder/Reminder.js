@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { addReminderAction } from '../../redux/actions';
+import { addReminderAction, editReminderAction } from '../../redux/actions';
 
 import './reminder.css';
 
 const Reminder = function(props) {
-  const { setShowReminder, saveReminder, cellDetails } = props;
+  const { setShowReminder, saveReminder, cellDetails, updateReminder } = props;
   const [reminderData, setReminder] = useState(cellDetails);
 
   const formatDate = cellDate => {
@@ -18,13 +18,25 @@ const Reminder = function(props) {
       .join('-');
   };
 
+  const submitReminder = reminderData => {
+    console.log('rimmmmmm ', reminderData)
+    if (reminderData.id) {
+      updateReminder(reminderData);
+      setShowReminder(null)(false);
+      return null;
+    }
+    reminderData.id = `${Math.random().toString(16).slice(2)}`;
+    saveReminder(reminderData);
+    setShowReminder(null)(false);
+  };
+
   return (
     <div className="reminder-container">
       <div className="reminder-content">
         <div className="close" onClick={() => setShowReminder(null)(false)}>
           &times;
         </div>
-        <h3>Add Reminder</h3>
+        <h3>{reminderData.id ? 'Edit' : 'Add'} Reminder</h3>
         <input
           type="text"
           maxLength="30"
@@ -32,6 +44,7 @@ const Reminder = function(props) {
           onChange={e => setReminder({ ...reminderData, title: e.target.value })}
           placeholder="Add title"
           value={reminderData.title || ''}
+          required
         />
         <input
           type="date"
@@ -46,15 +59,10 @@ const Reminder = function(props) {
           placeholder="e.g. 17:30"
           onChange={e => setReminder({ ...reminderData, time: e.target.value })}
           value={reminderData.time || ''}
+          required
         />
-        <button
-          type="submit"
-          onClick={() => {
-            saveReminder(reminderData);
-            setShowReminder(null)(false);
-          }}
-        >
-          Save
+        <button type="submit" onClick={() => submitReminder(reminderData)}>
+        {reminderData.id ? 'Update' : 'Save'} 
         </button>
       </div>
     </div>
@@ -62,7 +70,8 @@ const Reminder = function(props) {
 };
 
 const mapDispatchToProps = dispatch => ({
-  saveReminder: addReminderAction(dispatch)
+  saveReminder: addReminderAction(dispatch),
+  updateReminder: editReminderAction(dispatch)
 });
 
 const mapStateToProps = state => ({
