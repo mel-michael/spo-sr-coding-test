@@ -1,36 +1,36 @@
-import { generateDaysInMonth} from '../utils/helper';
-import { FETCH_DATE } from './actions';
-
-
-
-const formatDate = function() {
-	const allDates = generateDaysInMonth();
-	let parent = [[],[],[],[],[],[]];
-  let row = 0;
-
-	allDates.forEach((date, index) => {
-		const column = date.getDay();
-    if(row < parent.length) {
-      parent[row][column] = date;
-    }
-    if(column === 6) {
-      row++;
-    }
-	})
-
-  return parent;
-}
+import { ADD_REMINDER, FETCH_DATE } from './actions';
 
 const initialState = {
-	allDates: formatDate(),
+  allDates: [],
   reminders: {}
 };
 
 export const reducer = (state = initialState, action) => {
+  const { reminders } = state;
   switch (action.type) {
     case FETCH_DATE:
-      return { ...state, allDates: action.payload };
-      
+			return { ...state, allDates: action.payload };
+
+    case ADD_REMINDER:
+      const { date } = action.payload;
+      const dateObj = new Date(`${date}`);
+      const reminderKey = `${dateObj.getFullYear()}_${dateObj.getMonth()}`;
+      const dateKey = `${dateObj.getDate()}`;
+
+      if (reminders[reminderKey] === undefined) {
+        reminders[reminderKey] = {};
+        reminders[reminderKey][dateKey] = [action.payload];
+        return { ...state, ...reminders };
+      }
+
+      if (reminders[reminderKey] && reminders[reminderKey][dateKey] === undefined) {
+        reminders[reminderKey][dateKey] = [action.payload];
+        return { ...state, ...reminders };
+      }
+
+      reminders[reminderKey][dateKey] = [...reminders[reminderKey][dateKey], action.payload];
+      return { ...state, ...reminders };
+
     default:
       return state;
   }
